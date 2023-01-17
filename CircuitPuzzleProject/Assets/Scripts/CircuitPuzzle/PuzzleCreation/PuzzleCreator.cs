@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace CircuitPuzzle
 {
+    [ExecuteInEditMode]
     public class PuzzleCreator : MonoBehaviour
     {
         #region FIELDS
@@ -13,13 +14,24 @@ namespace CircuitPuzzle
 
         private int lastCheckedColumns;
         private int lastCheckedRows;
+
+        private EditorAssetReferences references;
         #endregion
 
         #region PROPERTIES
         public int Columns { get => columns; set => columns = value; }
         public int Rows { get => rows; set => rows = value; }
-        public GameObject BlankPiecePrefab { get => blankPiecePrefab; set => blankPiecePrefab = value; }
-        public GameObject BoardPrefab { get => boardPrefab; set => boardPrefab = value; }
+        public GameObject BlankPiecePrefab { get => blankPiecePrefab; private set => blankPiecePrefab = value; }
+        public GameObject BoardPrefab { get => boardPrefab; private set => boardPrefab = value; }
+        public EditorAssetReferences References { get => references; private set => references = value; }
+        #endregion
+
+        #region UNITY METHODS
+        private void Start()
+        {
+            // Get assetReferences object.
+            references = GetComponent<EditorAssetReferences>();
+        }
         #endregion
 
         #region PUBLIC METHODS

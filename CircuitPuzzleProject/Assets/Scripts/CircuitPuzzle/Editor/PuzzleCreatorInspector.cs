@@ -6,17 +6,26 @@ namespace CircuitPuzzle
     [CustomEditor(typeof(PuzzleCreator))]
     public class PuzzleCreatorInspector : Editor
     {
-        private int contentSpacing = 10;
-        private int groupSpacing = 3;
+        #region FIELDS
+        // Spacing.
+        private int contentSpacing = 20;
+        private int groupSpacing = 5;
 
-        private int headerFontSize = 20;
+        // Styles.
+        private GUIStyle headerStyle;
+        private GUIStyle labelStyle;
+        private GUIStyle fieldStyle;
+        private GUIStyle buttonStyle;
 
-        private int labelFontSize = 30;
-        private int labelSpacing = 3;
+        // Textures.
+        private Texture2D leftArrowTexture;
+        private Texture2D rightArrowTexture;
+        #endregion
 
+        #region GUI
         public override void OnInspectorGUI()
         {
-            #region INITIALIZE
+            #region SETUP
             // Get selected PuzzleCreator script.
             // Returns if casting fails.
             PuzzleCreator creator = target as PuzzleCreator;
@@ -24,98 +33,100 @@ namespace CircuitPuzzle
             {
                 return;
             }
+
+            // Set styles for UI elements.
+            headerStyle = creator.References.HeaderStyle;
+            labelStyle = creator.References.LabelStyle;
+            fieldStyle = creator.References.FieldStyle;
+            buttonStyle= creator.References.ButtonStyle;
+
+            // Set textures for UI elements.
+            leftArrowTexture = creator.References.LeftArrow;
+            rightArrowTexture = creator.References.RightArrow;
             #endregion
 
-            #region STYLES
-            // Create styles for labels.
-            // Header Style.
-            GUIStyle headerStyle = new GUIStyle();
-            headerStyle.fontStyle = FontStyle.Bold;
-            headerStyle.alignment = TextAnchor.MiddleCenter;
-            headerStyle.fontSize = headerFontSize;
-            headerStyle.normal.textColor = Color.white;
-            // Label Style.
-            GUIStyle labelStyle = new GUIStyle();
-            labelStyle.fontStyle = FontStyle.Normal;
-            labelStyle.alignment = TextAnchor.MiddleCenter - labelSpacing;
-            labelStyle.fontSize = labelFontSize;
-            labelStyle.normal.textColor = Color.white;
-            // Field Style.
-            GUIStyle fieldStyle = new GUIStyle();
-            fieldStyle.fontStyle = FontStyle.Normal;
-            fieldStyle.alignment = TextAnchor.MiddleCenter + labelSpacing;
-            fieldStyle.fontSize = labelFontSize;
-            fieldStyle.normal.textColor = Color.white;
-            #endregion
-
-            #region BOARD SIZE SETTINGS
+            #region LAYOUT
             // Board size settings header.
             EditorGUILayout.LabelField("Board Size", headerStyle);
 
-            // Spacing.
+            // Spacing //
             GUILayout.Space(contentSpacing);
 
-            // Columns section.
+            // COLUMNS SECTION.
             // Field.
             EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Columns", labelStyle);
                 creator.Columns = EditorGUILayout.IntField(creator.Columns, fieldStyle);
             EditorGUILayout.EndHorizontal();
 
-            // Spacing.
+            // Spacing //
             GUILayout.Space(groupSpacing);
 
-            // Buttons.
+            // Arrow Buttons.
             EditorGUILayout.BeginHorizontal();
-                // Left button.
-                if (GUILayout.Button("Left"))
+                // Left Arrow.
+                if (GUILayout.Button(leftArrowTexture))
                 {
                     Debug.Log("Left");
                 }
-                // Right Button.
-                if (GUILayout.Button("Right"))
+
+                // Right Arrow.
+                if (GUILayout.Button(rightArrowTexture))
                 {
                     Debug.Log("Right");
                 }
             EditorGUILayout.EndHorizontal();
 
-            //Spacing.
+            //Spacing //
             GUILayout.Space(contentSpacing);
 
-            // Rows section.
+            // ROWS SECTION.
             // Field.
-            creator.Rows = EditorGUILayout.IntField("Rows", creator.Rows, labelStyle);
-            // Buttons.
             EditorGUILayout.BeginHorizontal();
-                // Left button.
-                if (GUILayout.Button("Left"))
+                EditorGUILayout.LabelField("Rows", labelStyle);
+                creator.Columns = EditorGUILayout.IntField(creator.Columns, fieldStyle);
+            EditorGUILayout.EndHorizontal();
+
+            // Spacing //
+            GUILayout.Space(groupSpacing);
+
+            // Arrow Buttons.
+            EditorGUILayout.BeginHorizontal();
+                // Left Arrow.
+                if (GUILayout.Button(leftArrowTexture))
                 {
                     Debug.Log("Left");
                 }
-                // Right Button.
-                if (GUILayout.Button("Right"))
+
+                // Right Arrow.
+                if (GUILayout.Button(rightArrowTexture))
                 {
                     Debug.Log("Right");
                 }
             EditorGUILayout.EndHorizontal();
 
-            // Spacing.
+            // Spacing //
             GUILayout.Space(contentSpacing);
 
-            // Apply and cancel section.
+            // APPLY AND CANCEL SECTION.
             EditorGUILayout.BeginVertical();
             // Apply button.
-                if (GUILayout.Button("Apply"))
+                if (GUILayout.Button("Apply", buttonStyle))
                 {
                     Debug.Log("Apply");
                 }
+
+                // Spacing //
+                GUILayout.Space(groupSpacing);
+
                 // Cancel button.
-                if (GUILayout.Button("Cancel"))
+                if (GUILayout.Button("Cancel", buttonStyle))
                 {
                     Debug.Log("Cancel");
                 }
             EditorGUILayout.EndVertical();
-            #endregion
         }
+        #endregion
     }
+    #endregion
 }
