@@ -8,6 +8,7 @@ TagManager:
   - ConnectorCircuitPiece
   - StartingCircuitPiece
   - EndingCircuitPiece
+  - CircuitInteraction
   layers:
   - Default
   - TransparentFX

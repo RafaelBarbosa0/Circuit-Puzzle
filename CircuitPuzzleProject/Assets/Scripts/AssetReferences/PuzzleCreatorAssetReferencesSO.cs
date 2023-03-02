@@ -35,6 +35,15 @@ namespace CircuitPuzzle
         // Prefabs.
         [SerializeField]
         private GameObject blankPiecePrefab;
+        [SerializeField]
+        private GameObject previewPiecePrefab;
+
+        // Materials.
+        [SerializeField]
+        private Material greenBase;
+        [SerializeField]
+        private Material redBase;
+
 
         public GUIStyle LabelStyle { get => labelStyle; private set => labelStyle = value; }
         public GUIStyle FieldStyle { get => fieldStyle; private set => fieldStyle = value; }
@@ -47,5 +56,8 @@ namespace CircuitPuzzle
         public GUIStyle ButtonGreenStyle { get => buttonGreenStyle; private set => buttonGreenStyle = value; }
         public GUIStyle ButtonRedStyle { get => buttonRedStyle; private set => buttonRedStyle = value; }
         public GUIStyle CheckBoxStyle { get => checkBoxStyle; private set => checkBoxStyle = value; }
+        public GameObject PreviewPiecePrefab { get => previewPiecePrefab; private set => previewPiecePrefab = value; }
+        public Material GreenBase { get => greenBase; private set => greenBase = value; }
+        public Material RedBase { get => redBase; private set => redBase = value; }
     }
 }
