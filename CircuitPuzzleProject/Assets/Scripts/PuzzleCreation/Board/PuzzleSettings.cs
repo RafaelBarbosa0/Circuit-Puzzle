@@ -23,6 +23,10 @@ namespace CircuitPuzzle
         // Boolean that determines whether this puzzle is continuous or one time completion.
         [SerializeField]
         private bool oneTimeCompletion;
+
+        // Boolean that determines whether this puzzle's ending pieces are grouped or single instances.
+        [SerializeField]
+        private bool isGrouped;
         #endregion
 
         #region UNITY METHODS
@@ -30,11 +34,6 @@ namespace CircuitPuzzle
         {
             // Get references.
             references = GetComponent<SOAssetHolder>();
-
-            // Starting values.
-            LockStartingPieces = true;
-            lockEndingPieces = true;
-            oneTimeCompletion = true;
         }
         #endregion
 
@@ -43,6 +42,7 @@ namespace CircuitPuzzle
         public bool LockEndingPieces { get => lockEndingPieces;  set => lockEndingPieces = value; }
         public bool OneTimeCompletion { get => oneTimeCompletion;  set => oneTimeCompletion = value; }
         public SOAssetHolder References { get => references; private set => references = value; }
+        public bool IsGrouped { get => isGrouped; set => isGrouped = value; }
         #endregion
     }
 }

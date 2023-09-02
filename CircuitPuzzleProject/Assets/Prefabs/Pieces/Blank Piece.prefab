@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2414628903444633891}
   - component: {fileID: 2357640544466812662}
   - component: {fileID: 4330738092028754820}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7317635430083406195}
   - component: {fileID: 7794458845918370067}
   - component: {fileID: -263023069115274324}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Blank Piece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5819912091705367782}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 7528320677728180896}
   - component: {fileID: 8140315655562808266}
   - component: {fileID: 7988645997162150643}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BlankPiece
   m_TagString: Untagged
   m_Icon: {fileID: 0}

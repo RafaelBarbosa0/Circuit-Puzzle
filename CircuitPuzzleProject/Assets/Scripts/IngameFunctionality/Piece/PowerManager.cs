@@ -11,6 +11,12 @@ namespace CircuitPuzzle
         // Reference to the puzzle manager this piece belongs to.
         private PuzzleManager puzzleManager;
 
+        // Reference to puzzle settings to check puzzle type.
+        private PuzzleSettings puzzleSettings;
+
+        // Reference to interact point, used to end interaction on completion of one time completion type puzzles.
+        private InteractPoint interactPoint;
+
         // Boolean that keeps track of whether this piece is powered or not.
         [SerializeField]
         private bool isPowered;
@@ -52,6 +58,13 @@ namespace CircuitPuzzle
             Transform pieceParent = transform.parent;
             Transform boardParent = pieceParent.parent;
             puzzleManager = boardParent.gameObject.GetComponent<PuzzleManager>();
+
+            // Get PuzzleSettings reference.
+            puzzleSettings = boardParent.GetComponent<PuzzleSettings>();
+
+            // Get InteractPoint reference.
+            Transform interactTransform = boardParent.GetChild(2);
+            interactPoint = interactTransform.GetComponent<InteractPoint>();
         }
         #endregion
 
@@ -89,9 +102,6 @@ namespace CircuitPuzzle
             // Turn on power for this piece.
             isPowered = true;
 
-            // Ending Piece power on behavior.
-            PowerOnEndingPiece();
-
             // Set wire model color.
             foreach (MeshRenderer renderer in wireModels)
             {
@@ -125,7 +135,7 @@ namespace CircuitPuzzle
             // If so, run their respective OnPoweredOff events.
             if (isLastPiece)
             {
-                puzzleManager.PowerOffEndingPieces();
+                puzzleManager.SwitchPiecePower();
             }
         }
 
@@ -142,14 +152,14 @@ namespace CircuitPuzzle
 
         /// <summary>
         /// Handles the behavior for powering off ending pieces.
-        /// If this ending piece was powered on in previous puzzle state, OnPoweredOn event will be invoked.
+        /// If this ending piece was powered on in previous puzzle state, OnPoweredOff event will be invoked.
         /// </summary>
         public void PowerOffEndingPiece()
         {
             // If this is an ending piece.
             if (tag == "EndingCircuitPiece")
             {
-                // If this piece was already powered during previous puzzle state or it is currently powered, OnPoweredOff event will not be invoked.
+                // If this piece was already unpowered during previous puzzle state or it is currently powered, OnPoweredOff event will not be invoked.
                 if (wasPreviouslyPowered == false || isPowered)
                 {
                     return;
@@ -158,9 +168,50 @@ namespace CircuitPuzzle
                 // During next power check, we will know now this piece was not previously powered.
                 wasPreviouslyPowered = false;
 
-                // Get EndingPieceEvents reference and invoke OnPoweredOff event.
-                EndingPieceEvents ending = GetComponent<EndingPieceEvents>();
-                ending.OnPoweredOff.Invoke();
+                // If the puzzle is in single mode.
+                if (puzzleSettings.IsGrouped == false)
+                {
+                    // Get EndingPieceEvents reference and invoke OnPoweredOff event.
+                    EndingPieceEvents ending = GetComponent<EndingPieceEvents>();
+                    ending.OnPoweredOff.Invoke();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles the behavior for powering on ending pieces.
+        /// If this ending piece was not powered on in previous puzzle state, OnPoweredOn event will be invoked.
+        /// </summary>
+        public void PowerOnEndingPiece()
+        {
+            // If this is an ending piece.
+            if (tag == "EndingCircuitPiece")
+            {
+                // If this piece was already powered during previous puzzle state, OnPoweredOn event will not be invoked.
+                if (wasPreviouslyPowered)
+                {
+                    return;
+                }
+
+                // During next power check, we will know now this piece was previously powered.
+                wasPreviouslyPowered = true;
+
+                // If puzzle is in single mode.
+                if(puzzleSettings.IsGrouped == false)
+                {
+                    // Get EndingPieceEvents reference and invoke OnPoweredOn event.
+                    EndingPieceEvents ending = GetComponent<EndingPieceEvents>();
+                    ending.OnPoweredOn.Invoke();
+
+                    // Set completed status as true for one time completion puzzles.
+                    puzzleManager.Completed = true;
+
+                    // If this is a one time completion puzzle, for end interaction on puzzle completion.
+                    if (puzzleSettings.OneTimeCompletion)
+                    {
+                        interactPoint.EndInteraction();
+                    }
+                }
             }
         }
         #endregion
@@ -175,30 +226,6 @@ namespace CircuitPuzzle
             foreach(PowerManager piece in wires[wireIndex].Connections)
             {
                 connectedPieces.Add(piece);
-            }
-        }
-
-        /// <summary>
-        /// Handles the behavior for powering on ending pieces.
-        /// If this ending piece was not powered on in previous puzzle state, OnPoweredOn event will be invoked.
-        /// </summary>
-        private void PowerOnEndingPiece()
-        {
-            // If this is an ending piece.
-            if (tag == "EndingCircuitPiece")
-            {
-                // If this piece was already powered during previous puzzle state, OnPoweredOn event will not be invoked.
-                if (wasPreviouslyPowered)
-                {
-                    return;
-                }
-
-                // During next power check, we will know now this piece was previously powered.
-                wasPreviouslyPowered = true;
-
-                // Get EndingPieceEvents reference and invoke OnPoweredOn event.
-                EndingPieceEvents ending = GetComponent<EndingPieceEvents>();
-                ending.OnPoweredOn.Invoke();
             }
         }
         #endregion

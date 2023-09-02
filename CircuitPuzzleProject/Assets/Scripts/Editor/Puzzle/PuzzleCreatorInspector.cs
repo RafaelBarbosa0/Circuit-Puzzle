@@ -26,9 +26,6 @@ namespace CircuitPuzzle
         // Textures.
         private Texture2D leftArrowTexture;
         private Texture2D rightArrowTexture;
-
-        // Int that stores the child count of board transform so we can detect when it was changed.
-        private int boardCount;
         #endregion
 
         #region GUI
@@ -60,7 +57,7 @@ namespace CircuitPuzzle
             #endregion
             // Initial undo warning.
             bool preview = true;
-            if(creator.UndoCleared == false)
+            if (creator.UndoCleared == false)
             {
                 bool instantiate = EditorUtility.DisplayDialog("Circuit Puzzle", "To avoid errors, creating a circuit puzzle instance clears the undo history.\n" +
                     "If you wish to revert any changes in the scene, do so before creating a circuit puzzle.", "Continue", "Cancel");
@@ -192,17 +189,24 @@ namespace CircuitPuzzle
             // Buttons.
             // Enabled button.
             GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+
                 // Enabled button.
                 if (GUILayout.Button("Enabled", enabledStyle))
                 {
                     creator.IsLimited = true;
                 }
 
+                // Spacing //
+                GUILayout.Space(groupSpacing * 2);
+
                 // Disabled button.
                 if (GUILayout.Button("Disabled", disabledStyle))
                 {
                     creator.IsLimited = false;
                 }
+
+            GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 
             // Spacing //
@@ -264,7 +268,7 @@ namespace CircuitPuzzle
                 creator.GeneratePreview();
             }
 
-            else if(creator.PreviewPieces != null && (creator.SelectedColumns == creator.SetColumns && creator.SelectedRows == creator.SetRows))
+            else if((creator.PreviewPieces.GetLength(0) > 0 && creator.PreviewPieces.GetLength(1) > 0) && (creator.SelectedColumns == creator.SetColumns && creator.SelectedRows == creator.SetRows))
             {
                 creator.ResetPreview();
             }

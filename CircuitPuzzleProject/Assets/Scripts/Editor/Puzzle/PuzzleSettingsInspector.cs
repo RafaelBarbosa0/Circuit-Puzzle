@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Codice.Client.Common.GameUI;
+using UnityEditor.SceneManagement;
 
 namespace CircuitPuzzle
 {
@@ -58,6 +59,7 @@ namespace CircuitPuzzle
             GUILayout.Space(spacing);
 
             GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
 
             // Set active button.
             GUIStyle continuous;
@@ -75,29 +77,92 @@ namespace CircuitPuzzle
                 continuous = activeButton;
             }
 
-            // One time button.
-            if (GUILayout.Button("One Time", oneTime))
+            // Continuous button.
+            if (GUILayout.Button("Continuous", continuous))
             {
-                settings.OneTimeCompletion = true;
+                settings.OneTimeCompletion = false;
+
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
             }
 
             // Spacing //
             GUILayout.Space(spacing);
 
-            // Continuous button.
-            if (GUILayout.Button("Continuous", continuous))
-            {
-                settings.OneTimeCompletion = false;
-            }
-            GUILayout.EndHorizontal();
 
+            // One time button.
+            if (GUILayout.Button("One Time", oneTime))
+            {
+                settings.OneTimeCompletion = true;
+
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            }
+
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            
+            // Spacing //
+            GUILayout.Space(spacing * 2);
+
+            //ENDING GROUP SECTION.
+            // Title.
+            GUILayout.Label("Group Mode", labelStyle);
+
+            // Spacing //
+            GUILayout.Space(spacing);
+
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+
+            // Set active button.
+            GUIStyle endingSingle;
+            GUIStyle endingGrouped;
+
+            if (settings.IsGrouped)
+            {
+                endingSingle = inactiveButton;
+                endingGrouped = activeButton;
+            }
+
+            else
+            {
+                endingSingle = activeButton;
+                endingGrouped = inactiveButton;
+            }
+
+            // Single button.
+            if (GUILayout.Button("Grouped", endingGrouped))
+            {
+                settings.IsGrouped = true;
+
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            }
+
+            // Spacing //
+            GUILayout.Space(spacing);
+
+            // Grouped button.
+            if (GUILayout.Button("Single", endingSingle))
+            {
+                settings.IsGrouped = false;
+
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            }
+
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
+
+            // Spacing //
             GUILayout.Space(spacing * 2);
 
             // LOCK STARTER SECTION.
             // Title.
             GUILayout.Label("Starter pieces", labelStyle);
+
             GUILayout.Space(spacing);
+
             GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
 
                     // Set active button.
                     GUIStyle starterLocked;
@@ -119,6 +184,8 @@ namespace CircuitPuzzle
                     if(GUILayout.Button("Locked", starterLocked))
                     {
                         settings.LockStartingPieces = true;
+
+                        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
                     }
 
                     GUILayout.Space(spacing);
@@ -127,9 +194,12 @@ namespace CircuitPuzzle
                     if(GUILayout.Button("Unlocked", starterUnlocked))
                     {
                         settings.LockStartingPieces = false;
+
+                        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
                     }
 
-                GUILayout.EndHorizontal();
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
 
             // Spacing //
             GUILayout.Space(spacing * 2);
@@ -142,6 +212,7 @@ namespace CircuitPuzzle
             GUILayout.Space(spacing);
 
             GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
 
             // Set active button.
             GUIStyle endingLocked;
@@ -163,6 +234,8 @@ namespace CircuitPuzzle
             if(GUILayout.Button("Locked", endingLocked))
             {
                 settings.LockEndingPieces = true;
+
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
             }
 
             // Spacing //
@@ -172,9 +245,12 @@ namespace CircuitPuzzle
             if(GUILayout.Button("Unlocked", endingUnlocked))
             {
                 settings.LockEndingPieces = false;
+
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
             }
+
+            GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
         }
     }
 }

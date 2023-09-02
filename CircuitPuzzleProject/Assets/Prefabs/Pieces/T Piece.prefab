@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4718186403040240913}
   - component: {fileID: 4657284402203061282}
   - component: {fileID: 1784110269218956018}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MiddleCollider
   m_TagString: CircuitWire
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 7145297776393732423}
   - component: {fileID: 8557606422474629994}
   - component: {fileID: 3475325394813467387}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 3264562911659391684}
   - component: {fileID: 3203316142473649425}
   - component: {fileID: 3518909738111359075}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 1704892002654327355}
   - component: {fileID: 938957950511300976}
   - component: {fileID: 4378623789604138958}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpCollider
   m_TagString: CircuitWire
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1353068418370964574}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5173438969000805855}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 7528240934619604068}
   - component: {fileID: 1262413822452503290}
   - component: {fileID: 7242618629207838245}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 7256853018608236871}
   - component: {fileID: 8949856904230037549}
   - component: {fileID: 7066479521294719252}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BlankPiece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ GameObject:
   - component: {fileID: 2754438204208990753}
   - component: {fileID: 3543964497742438107}
   - component: {fileID: 6893606177716165659}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: T Piece
   m_TagString: ConnectorCircuitPiece
   m_Icon: {fileID: 0}

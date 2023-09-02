@@ -42,55 +42,80 @@ namespace CircuitPuzzle
                 GUILayout.Space(spacing * 2);
 
                 // Start piece button.
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
                 if (GUILayout.Button("Start", buttons[4]))
                 {
                     switcher.SwitchPiece(switcher.References.PieceAssets.StartPiece, 4);
                 }
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
 
                 // Spacing //
                 GUILayout.Space(spacing);
 
                 // End piece button.
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
                 if (GUILayout.Button("End", buttons[5]))
                 {
                     switcher.SwitchPiece(switcher.References.PieceAssets.EndPiece, 5);
                 }
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
 
                 // Spacing //
                 GUILayout.Space(spacing);
 
                 // Straight piece button.
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
                 if (GUILayout.Button("Straight", buttons[1]))
                 {
                     switcher.SwitchPiece(switcher.References.PieceAssets.StraightPiece, 1);
                 }
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
 
                 // Spacing //
                 GUILayout.Space(spacing);
 
                 // Corner piece button.
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
                 if (GUILayout.Button("Corner", buttons[3]))
                 {
                     switcher.SwitchPiece(switcher.References.PieceAssets.CornerPiece, 3);
                 }
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
 
                 // Spacing //
                 GUILayout.Space(spacing);
 
                 // T piece button.
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
                 if (GUILayout.Button("T", buttons[2]))
                 {
                     switcher.SwitchPiece(switcher.References.PieceAssets.TPiece, 2);
                 }
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
 
                 // Spacing //
                 GUILayout.Space(spacing);
 
                 // Blank Piece Button.
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
                 if (GUILayout.Button("Blank", buttons[0]))
                 {
                     switcher.SwitchPiece(switcher.References.PieceAssets.BlankPiece, 0);
                 }
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+
             GUILayout.EndVertical();
 
             // Repaint so button hover changes are reflected.

@@ -8,11 +8,17 @@ namespace CircuitPuzzle
     public class PuzzleManager : MonoBehaviour
     {
         #region FIELDS
+        // Reference to interact point.
+        private InteractPoint interactPoint;
+
         // Matrix containing the individual pieces for this puzzle
         private GameObject[,] puzzlePieces;
 
         // Reference to the currently active puzzle instance.
         private static PuzzleManager activeInstance;
+
+        // Reference to group mode events.
+        private GroupedPieceEvents groupedEvents;
 
         // Vector2 which holds the index of the currently selected puzzle piece.
         private Vector2 selectedPieceIndex;
@@ -35,17 +41,30 @@ namespace CircuitPuzzle
 
         // Reference to this puzzle's puzzle settings.
         private PuzzleSettings puzzleSettings;
+
+        // Tells us if this puzzle was completed, used for one time completion type puzzles.
+        private bool completed;
+
+        // Tracks if puzzle was powered in previous state.
+        private bool previouslyPowered;
         #endregion
 
         #region PROPERTIES
         public static PuzzleManager ActiveInstance { get => activeInstance; private set => activeInstance = value; }
+        public bool Completed { get => completed; set => completed = value; }
         #endregion
 
         #region UNITY METHODS
         private void Awake()
         {
+            // Get reference to interact point.
+            interactPoint = transform.GetChild(2).GetComponent<InteractPoint>();
+
             // Get the puzzle piece matrix from the puzzle creator.
             puzzlePieces = GetComponent<PuzzleCreator>().PuzzlePieces;
+
+            // Get grouped events reference.
+            groupedEvents = GetComponent<GroupedPieceEvents>();
 
             // Initialize lists.
             startingPieces = new List<GameObject>();
@@ -274,9 +293,9 @@ namespace CircuitPuzzle
         /// <summary>
         /// Calls IPowerOffEndingPieces coroutine.
         /// </summary>
-        public void PowerOffEndingPieces()
+        public void SwitchPiecePower()
         {
-            StartCoroutine(IPowerOffEndingPieces());
+            StartCoroutine(ISwitchPiecePower());
         }
         #endregion
 
@@ -296,15 +315,66 @@ namespace CircuitPuzzle
             CheckPowerStatus();
         }
 
-        private IEnumerator IPowerOffEndingPieces()
+        /// <summary>
+        /// Coroutine that handles power status switching.
+        /// In single mode, each piece is powered and their individual events run independent of one another.
+        /// In group mode, all pieces need to be powered for events to run.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator ISwitchPiecePower()
         {
             // Wait before running to make sure all pieces have finished checking their connections.
             yield return new WaitForSeconds(0.05f);
 
-            // Power off events for ending pieces.
-            foreach(PowerManager manager in endingPieceManagers)
+            // Switch power on ending pieces, if in single mode they will run events internally.
+            // Power on ending pieces.
+            foreach (PowerManager manager in endingPieceManagers)
+            {
+                manager.PowerOnEndingPiece();
+            }
+
+            // Power off ending pieces.
+            foreach (PowerManager manager in endingPieceManagers)
             {
                 manager.PowerOffEndingPiece();
+            }
+
+            // If puzzle is in group mode, check if power was turned on or off and run events accordingly.
+            if (puzzleSettings.IsGrouped)
+            {
+                // Check if puzzle is powered or not in current state.
+                bool puzzlePowered = true;
+
+                foreach (PowerManager manager in endingPieceManagers)
+                {
+                    if (manager.IsPowered == false)
+                    {
+                        puzzlePowered = false;
+                    }
+                }
+
+                // Power on events.
+                if (puzzlePowered && previouslyPowered == false)
+                {
+                    groupedEvents.OnPoweredOn.Invoke();
+
+                    previouslyPowered = true;
+
+                    // End interaction and set as complete for one time completion puzzles.
+                    if (puzzleSettings.OneTimeCompletion)
+                    {
+                        completed = true;
+                        interactPoint.EndInteraction();
+                    }
+                }
+
+                // Power off events.
+                else if (puzzlePowered == false && previouslyPowered)
+                {
+                    groupedEvents.OnPoweredOff.Invoke();
+
+                    previouslyPowered = false;
+                }
             }
         }
         #endregion

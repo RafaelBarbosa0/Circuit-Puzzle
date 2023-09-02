@@ -10,6 +10,9 @@ namespace CircuitPuzzle
         #region FIELDS
         // Reference to the puzzle manager component in parent transform.
         private PuzzleManager puzzleManager;
+
+        // Reference to puzzle settings, used to check if puzzle is one time or continuous.
+        private PuzzleSettings puzzleSettings;
         #endregion
 
         #region UNITY METHODS
@@ -17,6 +20,9 @@ namespace CircuitPuzzle
         {
             // Get puzzle manager reference.
             puzzleManager = transform.parent.GetComponent<PuzzleManager>();
+
+            // Get puzzle settings reference.
+            puzzleSettings = transform.parent.GetComponent<PuzzleSettings>();
         }
         #endregion
 
@@ -35,13 +41,66 @@ namespace CircuitPuzzle
         /// </summary>
         public void BeginInteraction()
         {
-            if(PuzzleManager.ActiveInstance == null)
+            // If the puzzle is one time completion and it has already been completed, we cannot interact with it again.
+            if((PuzzleManager.ActiveInstance == null) && (puzzleSettings.OneTimeCompletion == false || puzzleManager.Completed == false))
             {
                 // Start puzzle.
                 puzzleManager.StartPuzzle();
 
                 // Invoke event.
                 OnBeginInteraction.Invoke();
+            }
+        }
+
+        /// <summary>
+        /// Just calls the same function from the puzzle manager.
+        /// This way user doesn't need to check if active instance is null manually.
+        /// Use -1 to move down and 1 to move up.
+        /// </summary>
+        /// <param name="direction"></param>
+        public void MoveSelectionVertical(int direction)
+        {
+            if(PuzzleManager.ActiveInstance != null)
+            {
+                PuzzleManager.ActiveInstance.MoveSelectionVertical(direction);
+            }
+        }
+
+        /// <summary>
+        /// Just calls the same function from the puzzle manager.
+        /// This way user doesn't need to check if active instance is null manually.
+        /// Use -1 to move left and 1 to move right.
+        /// </summary>
+        /// <param name="direction"></param>
+        public void MoveSelectionHorizontal(int direction)
+        {
+            if(PuzzleManager.ActiveInstance != null)
+            {
+                PuzzleManager.ActiveInstance.MoveSelectionHorizontal(direction);
+            }
+        }
+
+        /// <summary>
+        /// Just calls the same function from the puzzle manager.
+        /// This way user doesn't need to check if active instance is null manually.
+        /// </summary>
+        public void RotatePieceLeft()
+        {
+            if(PuzzleManager.ActiveInstance!= null)
+            {
+                PuzzleManager.ActiveInstance.RotatePieceLeft();
+            }
+        }
+
+        /// <summary>
+        /// Just calls the same function from the puzzle manager.
+        /// This way user doesn't need to check if active instance is null manually.
+        /// </summary>
+        public void RotatePieceRight()
+        {
+            if(PuzzleManager.ActiveInstance!= null)
+            {
+                PuzzleManager.ActiveInstance.RotatePieceRight();
             }
         }
 

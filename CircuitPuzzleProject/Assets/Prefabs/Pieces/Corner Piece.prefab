@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 91502718963241619}
   - component: {fileID: 4098065756120742840}
   - component: {fileID: 6505073812610259443}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpCollider
   m_TagString: CircuitWire
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 491366079071608107}
   - component: {fileID: 570786708766374654}
   - component: {fileID: 1966399240173813644}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 5239535796422469288}
   - component: {fileID: 6727561734926730373}
   - component: {fileID: 1992128681256033556}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 2713622864044449172}
   - component: {fileID: 1231088353978090810}
   - component: {fileID: 7161579330436005932}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftCollider
   m_TagString: CircuitWire
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1399128586162017842}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8610462282075718936}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 4892614872571593611}
   - component: {fileID: 4187044583381742869}
   - component: {fileID: 5700804197405780426}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 5704412751959383720}
   - component: {fileID: 6317397010078453698}
   - component: {fileID: 5300329790760959739}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BlankPiece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ GameObject:
   - component: {fileID: 758831483165115564}
   - component: {fileID: 5016715998889910475}
   - component: {fileID: -5003485273644183131}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Corner Piece
   m_TagString: ConnectorCircuitPiece
   m_Icon: {fileID: 0}

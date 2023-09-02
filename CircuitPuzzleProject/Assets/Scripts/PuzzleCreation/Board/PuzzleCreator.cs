@@ -170,7 +170,7 @@ namespace CircuitPuzzle
             boardTransform = transform.GetChild(0);
 
             // Get preview transform reference.
-            previewTransform = transform.GetChild(2);
+            previewTransform = transform.GetChild(1);
 
             // Get piece prefab from assets.
             blankPiece = references.PuzzleCreatorAssets.BlankPiecePrefab;
@@ -199,6 +199,12 @@ namespace CircuitPuzzle
         /// </summary>
         public void ApplyChanges()
         {
+            // We only want this to run in edit mode.
+            if (Application.isPlaying)
+            {
+                return;
+            }
+
             // Changes will only be applied if user changed row or column input.
             if (selectedColumns != setColumns || selectedRows != setRows)
             {
@@ -241,6 +247,12 @@ namespace CircuitPuzzle
         /// </summary>
         public void CancelChanges()
         {
+            // We only want this to run in edit mode.
+            if (Application.isPlaying)
+            {
+                return;
+            }
+
             // Function will only run if user made changes to row or column inputs.
             // Will also only run if a puzzle iteration already exists.
             if ((selectedColumns != setColumns || selectedRows != setRows) && setColumns != 0 && SetRows != 0)
@@ -258,6 +270,12 @@ namespace CircuitPuzzle
         /// </summary>
         public void ClearBoard()
         {
+            // We only want this to run in edit mode.
+            if (Application.isPlaying)
+            {
+                return;
+            }
+
             // Delete the board.
             DeleteBoard();
 
@@ -277,6 +295,12 @@ namespace CircuitPuzzle
         /// </summary>
         public void GeneratePreview()
         {
+            // We only want this to run in edit mode.
+            if (Application.isPlaying)
+            {
+                return;
+            }
+
             // Set previous row and column.
             previewRows = selectedRows;
             previewColumns = selectedColumns;
@@ -318,6 +342,12 @@ namespace CircuitPuzzle
         /// </summary>
         public void ResetPreview()
         {
+            // We only want this to run in edit mode.
+            if (Application.isPlaying)
+            {
+                return;
+            }
+
             // Delete preview piece gameobjects.
             DeletePreviewPieces();
 

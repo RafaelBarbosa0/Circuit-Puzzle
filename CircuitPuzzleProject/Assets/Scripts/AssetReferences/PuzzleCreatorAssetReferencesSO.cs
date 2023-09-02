@@ -21,6 +21,7 @@ namespace CircuitPuzzle
         private GUIStyle labelStyle;
         [SerializeField]
         private GUIStyle fieldStyle;
+
         [SerializeField]
         private GUIStyle buttonStyle;
         [SerializeField]
@@ -31,6 +32,13 @@ namespace CircuitPuzzle
         private GUIStyle buttonRedStyle;
         [SerializeField]
         private GUIStyle checkBoxStyle;
+
+        [SerializeField]
+        private GUIStyle warningHeaderStyle;
+        [SerializeField]
+        private GUIStyle warningLabelStyle;
+        [SerializeField]
+        private GUIStyle warningFunctionStyle;
 
         // Prefabs.
         [SerializeField]
@@ -59,5 +67,8 @@ namespace CircuitPuzzle
         public GameObject PreviewPiecePrefab { get => previewPiecePrefab; private set => previewPiecePrefab = value; }
         public Material GreenBase { get => greenBase; private set => greenBase = value; }
         public Material RedBase { get => redBase; private set => redBase = value; }
+        public GUIStyle WarningHeaderStyle { get => warningHeaderStyle; private set => warningHeaderStyle = value; }
+        public GUIStyle WarningLabelStyle { get => warningLabelStyle; private set => warningLabelStyle = value; }
+        public GUIStyle WarningFunctionStyle { get => warningFunctionStyle; private set => warningFunctionStyle = value; }
     }
 }

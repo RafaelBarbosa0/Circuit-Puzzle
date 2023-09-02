@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6019889916779167069}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7182428555373390208}
   - component: {fileID: 7816233297057104793}
   - component: {fileID: 3162097592681415092}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: CircuitWire
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8899553484193878988}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 4319744717473859549}
   - component: {fileID: 4235821585947402248}
   - component: {fileID: 2767870466666489210}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 2475200336068017342}
   - component: {fileID: -2663874241726033514}
   - component: {fileID: -3579282458507090411}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Start Piece
   m_TagString: StartingCircuitPiece
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 9134832194009127293}
   - component: {fileID: 520201954206035939}
   - component: {fileID: 8232066647586140988}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 8217199163354661982}
   - component: {fileID: 7676553973105186100}
   - component: {fileID: 8407644266966361101}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BlankPiece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
