@@ -179,7 +179,7 @@ namespace CircuitPuzzle
             previewPiece = references.PuzzleCreatorAssets.PreviewPiecePrefab;
 
             // Get MeshRenderer and SpriteRenderer references.
-            pieceMeshRenderer = blankPiece.transform.GetChild(0).transform.GetChild(0).GetComponent<MeshRenderer>();
+            pieceMeshRenderer = blankPiece.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<MeshRenderer>();
 
             // Get material references.
             greenBase = references.PuzzleCreatorAssets.GreenBase;

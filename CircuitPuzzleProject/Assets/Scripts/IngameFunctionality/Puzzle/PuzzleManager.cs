@@ -18,16 +18,13 @@ namespace CircuitPuzzle
         private static PuzzleManager activeInstance;
 
         // Reference to group mode events.
-        private GroupedPieceEvents groupedEvents;
+        private GroupedEndingEvents groupedEvents;
 
         // Vector2 which holds the index of the currently selected puzzle piece.
         private Vector2 selectedPieceIndex;
 
-        // Reference to materials used on piece border's to indicate current selection.
-        [SerializeField]
-        private Material defaultBorder;
-        [SerializeField]
-        private Material selectedBorder;
+        // Reference to selection indicator.
+        private GameObject selectionIndicator;
 
         // Reference to the GameObjects of the various types of pieces in this puzzle.
         private List<GameObject> startingPieces;
@@ -60,11 +57,14 @@ namespace CircuitPuzzle
             // Get reference to interact point.
             interactPoint = transform.GetChild(2).GetComponent<InteractPoint>();
 
+            // Get reference to selection indicator.
+            selectionIndicator = transform.GetChild(3).gameObject;
+
             // Get the puzzle piece matrix from the puzzle creator.
             puzzlePieces = GetComponent<PuzzleCreator>().PuzzlePieces;
 
             // Get grouped events reference.
-            groupedEvents = GetComponent<GroupedPieceEvents>();
+            groupedEvents = GetComponent<GroupedEndingEvents>();
 
             // Initialize lists.
             startingPieces = new List<GameObject>();
@@ -130,6 +130,9 @@ namespace CircuitPuzzle
             {
                 // Reset the selected piece index.
                 selectedPieceIndex = new Vector2(puzzlePieces.GetLength(0) - 1, 0);
+
+                // Enable the selection indicator.
+                EnableSelectionIndicator();
 
                 // Set the indicator for the selected piece (starts at leftmost top corner).
                 SetSelectionIndicator((int)selectedPieceIndex.x, (int)selectedPieceIndex.y);
@@ -393,26 +396,22 @@ namespace CircuitPuzzle
             {
                 for (int j = 0; j < puzzlePieces.GetLength(1); j++)
                 {
-                    // Get reference for this piece's border's MeshRenderer component.
-                    Transform model = puzzlePieces[i, j].transform.GetChild(0);
-                    Transform border = model.GetChild(1);
-                    MeshRenderer renderer = border.GetComponent<MeshRenderer>();
-
                     // If this piece is the selected piece.
                     if (i == column && j == row)
                     {
-                        // Set the border's material to the selected border material.
-                        renderer.material = selectedBorder;
-                    }
+                        // Get reference for this piece's transform.
+                        Transform piece = puzzlePieces[i, j].transform;
 
-                    // If this piece is not the selected piece.
-                    else
-                    {
-                        // Set the border's material to the default border material.
-                        renderer.material = defaultBorder;
+                        // Set selection indicator's position same as selected piece.
+                        selectionIndicator.transform.position = piece.position;
                     }
                 }
             }
+        }
+
+        private void EnableSelectionIndicator()
+        {
+            selectionIndicator.SetActive(true);
         }
 
         /// <summary>
@@ -420,20 +419,7 @@ namespace CircuitPuzzle
         /// </summary>
         private void DisableSelectionIndicator()
         {
-            // Loop through matrix.
-            for(int i = 0; i < puzzlePieces.GetLength(0); i++)
-            {
-                for(int j = 0;j < puzzlePieces.GetLength(1); j++)
-                {
-                    // Get reference for this piece's border's MeshRenderer component.
-                    Transform model = puzzlePieces[i, j].transform.GetChild(0);
-                    Transform border = model.GetChild(1);
-                    MeshRenderer renderer = border.GetComponent<MeshRenderer>();
-
-                    // Set this piece's border's material to defaul border material.
-                    renderer.material = defaultBorder;
-                }
-            }
+            selectionIndicator.SetActive(false);
         }
 
         /// <summary>

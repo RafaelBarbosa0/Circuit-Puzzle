@@ -8,21 +8,25 @@ namespace CircuitPuzzle
     [ExecuteInEditMode]
     public class PrefabUnpacker : MonoBehaviour
     {
-        [SerializeField]
-        private bool isUnpacked;
+        //#region FIELDS
+        //[SerializeField]
+        //private PuzzleCreator creator;
+        //#endregion
 
-        #region UNITY METHODS
-        private void Awake()
-        {
-            // Unpacks the prefab once it is placed on the hierarchy.
-            // Only does this if it hasn't already been unpacked.
-            if (!isUnpacked)
-            {
-                PrefabUtility.UnpackPrefabInstance(gameObject, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+        //#region UNITY METHODS
+        //private void Awake()
+        //{
+        //    creator = GetComponent<PuzzleCreator>();
 
-                isUnpacked = true;
-            }
-        }
-        #endregion
+        //    // Unpacks the prefab once it is placed on the hierarchy.
+        //    // Only does this if it hasn't already been unpacked.
+        //    if (PrefabUtility.IsPartOfAnyPrefab(gameObject))
+        //    {
+        //        PrefabUtility.UnpackPrefabInstance(gameObject, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+
+        //        creator.UndoCleared = false;
+        //    }
+        //}
+        //#endregion
     }
 }

@@ -55,9 +55,12 @@ namespace CircuitPuzzle
             leftArrowTexture = creator.References.PuzzleCreatorAssets.LeftArrow;
             rightArrowTexture = creator.References.PuzzleCreatorAssets.RightArrow;
             #endregion
-            // Initial undo warning.
+
+            // Bool to setup creation preview.
             bool preview = true;
-            if (creator.UndoCleared == false)
+
+            // Initial undo warning.
+            if (creator.UndoCleared == false || PrefabUtility.IsPartOfAnyPrefab(creator.gameObject))
             {
                 bool instantiate = EditorUtility.DisplayDialog("Circuit Puzzle", "To avoid errors, creating a circuit puzzle instance clears the undo history.\n" +
                     "If you wish to revert any changes in the scene, do so before creating a circuit puzzle.", "Continue", "Cancel");
@@ -72,6 +75,8 @@ namespace CircuitPuzzle
                     preview = false;
                     DestroyImmediate(creator.gameObject);
                 }
+
+                PrefabUtility.UnpackPrefabInstance(creator.gameObject, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
 
                 creator.UndoCleared = true;
             }
@@ -158,56 +163,7 @@ namespace CircuitPuzzle
             {
                 creator.SelectedColumns++;
             }
-            EditorGUILayout.EndHorizontal();
-
-            // Spacing //
-            GUILayout.Space(contentSpacing);
-
-            // LIMITER SECTION.
-            // Title.
-            GUILayout.Label("Limiter", labelStyle);
-
-            // Spacing //
-            GUILayout.Space(groupSpacing * 2);
-
-            // Set button styles.
-            GUIStyle enabledStyle;
-            GUIStyle disabledStyle;
-
-            if (creator.IsLimited)
-            {
-                enabledStyle = activeButton;
-                disabledStyle = inactiveButton;
-            }
-
-            else
-            {
-                enabledStyle = inactiveButton;
-                disabledStyle = activeButton;
-            }
-
-            // Buttons.
-            // Enabled button.
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-
-                // Enabled button.
-                if (GUILayout.Button("Enabled", enabledStyle))
-                {
-                    creator.IsLimited = true;
-                }
-
-                // Spacing //
-                GUILayout.Space(groupSpacing * 2);
-
-                // Disabled button.
-                if (GUILayout.Button("Disabled", disabledStyle))
-                {
-                    creator.IsLimited = false;
-                }
-
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
+            EditorGUILayout.EndHorizontal();            
 
             // Spacing //
             GUILayout.Space(contentSpacing);
@@ -272,6 +228,55 @@ namespace CircuitPuzzle
             {
                 creator.ResetPreview();
             }
+
+            // Spacing //
+            GUILayout.Space(contentSpacing);
+
+            // LIMITER SECTION.
+            // Title.
+            GUILayout.Label("Limiter", labelStyle);
+
+            // Spacing //
+            GUILayout.Space(groupSpacing * 2);
+
+            // Set button styles.
+            GUIStyle enabledStyle;
+            GUIStyle disabledStyle;
+
+            if (creator.IsLimited)
+            {
+                enabledStyle = activeButton;
+                disabledStyle = inactiveButton;
+            }
+
+            else
+            {
+                enabledStyle = inactiveButton;
+                disabledStyle = activeButton;
+            }
+
+            // Buttons.
+            // Enabled button.
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+
+            // Enabled button.
+            if (GUILayout.Button("Enabled", enabledStyle))
+            {
+                creator.IsLimited = true;
+            }
+
+            // Spacing //
+            GUILayout.Space(groupSpacing * 2);
+
+            // Disabled button.
+            if (GUILayout.Button("Disabled", disabledStyle))
+            {
+                creator.IsLimited = false;
+            }
+
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
 
             // Repaint so button hover states are reflected in real time.
             Repaint();
