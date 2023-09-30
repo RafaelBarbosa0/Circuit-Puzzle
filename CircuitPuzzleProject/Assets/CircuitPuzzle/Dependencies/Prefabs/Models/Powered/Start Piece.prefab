@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2192644761876772848}
   - component: {fileID: 498796729418720922}
   - component: {fileID: 1786097520176027555}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BlankPiece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1342631972829801171}
   - component: {fileID: 7736248728189099085}
   - component: {fileID: 2187237389130989714}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2796834566829453750}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Start Piece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 6311334457119552627}
   - component: {fileID: 6245407032610837414}
   - component: {fileID: 5336200784325252820}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
