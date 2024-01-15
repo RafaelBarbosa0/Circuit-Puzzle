@@ -34,18 +34,18 @@ You will also have the option to rotate each piece with the arrows in the piece 
 ### Piece types
 The start piece type is where power is generated. Pieces connected to it will become powered on.
 
-The straight, corner and T piece are connector pieces, and are used to draw power from one end of the board to the other.
+The straight, corner and T piece are connector pieces, and are used to pass power through each other.
 
 End pieces will run user defined events when powered on.
 
-Blank pieces are simply filler and have no functionality.
+Blank pieces are just used to fill out empty spaces on the board and have no functionality.
 
 ### Setting up end events
 Events are set up depending on whether puzzle is in single or grouped mode.
 
 In the default group mode, use the grouped ending events component in the main circuit puzzle object.
 
-OnPoweredOn events will run when every ending piece is powered and OnPoweredOff will run if any ending piece is powered off while all were previously powered.
+OnPoweredOn events will run when every ending piece becomes powered and OnPoweredOff will run if any ending piece is powered off while all were previously powered.
 
 In single mode, use the ending piece events component inside each individual ending piece.
 
